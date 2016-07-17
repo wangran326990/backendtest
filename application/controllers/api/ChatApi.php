@@ -43,6 +43,9 @@ class ChatApi extends REST_Controller {
         $start_date = $this->get('start_date');
         $end_date = $this->get('end_date');
 
+        if($id===NULL && $start_date===NULL && $end_date===NULL){
+            $this->response($this->api_data, REST_Controller::HTTP_OK);
+        }
         //have id parameter
         if($id!==NULL && $start_date===NULL && $end_date===NULL){
             //get api data by id;
@@ -112,10 +115,7 @@ class ChatApi extends REST_Controller {
                 'message' => 'parameter pattern are not valid'
             ], REST_Controller::HTTP_NOT_FOUND);
         }
-
-        if(empty($this->_get_args)){
-            $this->response($this->api_data, REST_Controller::HTTP_OK);
-        }
+        
     }
 
 

@@ -49,14 +49,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples: my-controller/index -> my_controller/index
 |   my-controller/my-method -> my_controller/my_method
 */
-$route['default_controller'] = 'welcome';
+$route['default_controller'] = 'rest_server';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = TRUE;
 
-/*
-| -------------------------------------------------------------------------
-| Sample REST API Routes
-| -------------------------------------------------------------------------
-*/
-$route['api/ChatApi/users/(:num)'] = 'api/ChatApi/users/id/$1'; // Example 4
-$route['api/ChatApi/users/(:num)(\.)([a-zA-Z0-9_-]+)(.*)'] = 'api/ChatApi/users/id/$1/format/$3$4'; // Example 8
+
