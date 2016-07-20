@@ -1,5 +1,8 @@
 <?php
     defined('BASEPATH') OR exit('No direct script access allowed');
+    //token validation
+    session_start();
+    $token = $_SESSION['token']=md5(uniqid(mt_rand(),true));
 ?>
 
 <!DOCTYPE html>
@@ -86,6 +89,7 @@
             API KEY IS 1234
         </p>
 
+        <p>your token variable is <?php echo $token?></p>
         <ol>
             <li><a href="<?php echo site_url('api/ChatApi/users/X-API-KEY/1234'); ?>">Get ALL Data</a> - defaulting to JSON</li>
             <li><a href="<?php echo site_url('api/ChatApi/users/X-API-KEY/1234/format/xml'); ?>">Get ALL Data</a> - format support 'json',

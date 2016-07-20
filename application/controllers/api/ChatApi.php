@@ -26,7 +26,7 @@ class ChatApi extends REST_Controller {
     {
         // Construct the parent class
         parent::__construct();
-
+        session_start();
         // Configure limits on our controller methods
         // Ensure you have created the 'limits' table and enabled 'limits' within application/config/rest.php
         $this->methods['users_get']['limit'] = 500; // 500 requests per hour per user/key
@@ -35,6 +35,7 @@ class ChatApi extends REST_Controller {
     public function users_get()
     {
         // Users from a data store e.g. database
+        $this->token_validation();
         $this->load->model('API');
         //get all  api data;
         $this->api_data = $this->API->get_api_data();
@@ -118,6 +119,16 @@ class ChatApi extends REST_Controller {
         
     }
 
-
+    private function token_validation(){
+        $token = $this->get('token');
+        if($token && $_SESSION['token']==$token){
+            return true;
+        }else{
+            $this->response([
+                'status' => FALSE,
+                'message' => 'not a valid token!'
+            ], REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
 
 }
